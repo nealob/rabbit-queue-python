@@ -6,17 +6,16 @@ import config as cfg
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=cfg.RABBIT_HOST))
 channel = connection.channel()
 
-# Declare queue to send data
-channel.queue_declare(queue=cfg.QUEUE_TOPIC)
+json_file = open ('data.json')
+json_array = json.load(json_file)
+store_list = []
 
-data = {
-        "id": 1,
-        "name": "My Name",
-        "description": "This is description about me"
-    }
-message = json.dumps(data)
+for item in json_array:
 
-# Send data
-channel.basic_publish(exchange='', routing_key=cfg.QUEUE_TOPIC, body=message)
-print(" [x] Sent data to RabbitMQ")
+	message = json.dumps(item)
+
+	# Send data
+	channel.basic_publish(exchange='', routing_key=cfg.QUEUE_TOPIC, body=message)
+	print(" [x] Sent data to RabbitMQ")
+
 connection.close()
