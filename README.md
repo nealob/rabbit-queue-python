@@ -1,6 +1,9 @@
 # rabbit-queue-python
 '''
-Example send and receive JSON data with RabbitMQ
- 
-Create virtualenv and run pip install -r requirements.txt
+Example send data to RabbitMQ from a JSON file
+
+install Python https://www.python.org/
+install Pika https://pika.readthedocs.io/
+
+python producer.py
 '''
